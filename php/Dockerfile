@@ -19,6 +19,7 @@ WORKDIR /var/www/html
 COPY src/monitoring/ .
 
 WORKDIR /var/www/html/laravel
+COPY env/laravel/.env .env
 RUN composer install
 
 RUN chown -R www-data:www-data storage \
@@ -26,4 +27,4 @@ RUN chown -R www-data:www-data storage \
     && chmod -R 775 storage \
     && chmod -R 775 bootstrap/cache
 
-CMD ["php", "artisan", "migrate:fresh", "--seed"]
+CMD ["php", "artisan", "migrate", "--seed"]

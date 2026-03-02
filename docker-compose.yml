@@ -34,9 +34,9 @@ services:
       context: .
       dockerfile: ./php/Dockerfile
     container_name: syxtrade_php
-    working_dir: /var/www/html
+    working_dir: /var/www/html/laravel
     volumes:
-      - ./env/php/.env:/var/www/html/laravel/.env
+      - ./env/laravel/.env:/var/www/html/laravel/.env
       - ./php/php.ini:/usr/local/etc/php/conf.d/custom-php.ini
     ports:
       - "9001:9000"
