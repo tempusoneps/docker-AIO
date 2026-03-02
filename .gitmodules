@@ -1,0 +1,6 @@
+[submodule "src/syxtrade"]
+	path = src/syxtrade
+	url = https://github.com/tempusoneps/syxtrade.git
+[submodule "src/monitoring"]
+	path = src/monitoring
+	url = https://github.com/tempusoneps/syxtrade-monitoring

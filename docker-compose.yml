@@ -1,0 +1,11 @@
+services:
+  syxtrade_python:
+    build:
+      context: .
+      dockerfile: ./python/Dockerfile
+    container_name: syxtrade_python
+    networks:
+      - syxtrade_net
+
+networks:
+  syxtrade_net:
