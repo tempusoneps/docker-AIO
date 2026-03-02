@@ -1,26 +1,11 @@
 services:
-  syxtrade_python:
-    image: syxtrade:v1.0
-    build:
-      context: .
-      dockerfile: ./python/Dockerfile
-    container_name: syxtrade_python
-    networks:
-      - syxtrade_net
-
   syxtrade_mysql:
-    image: mysql:8.0.41
+    image: syxtrade-db:v1.0
+    build:
+      context: ./mysql
+      dockerfile: Dockerfile
     container_name: syxtrade_mysql
     restart: "no"
-    command: 
-      - --sql-mode=NO_ENGINE_SUBSTITUTION
-      - --log-bin-trust-function-creators=1
-      - --ssl=0
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_USER: syxtrade
-      MYSQL_PASSWORD: syxtrade123
-      MYSQL_DATABASE: syxtrade
     ports:
       - "3307:3306"
     volumes:
@@ -47,7 +32,7 @@ services:
     image: nginx:1.18
     container_name: syxtrade_nginx
     ports:
-      - "80:80"
+      - "8080:80"
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
     depends_on:
@@ -66,6 +51,17 @@ services:
       PHP_MEMORY_LIMIT: 1024M
     ports:
       - "81:80"
+    networks:
+      - syxtrade_net
+
+  syxtrade_python:
+    image: syxtrade:v1.0
+    depends_on:
+      - syxtrade_mysql
+    build:
+      context: .
+      dockerfile: ./python/Dockerfile
+    container_name: syxtrade_python
     networks:
       - syxtrade_net
 

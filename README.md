@@ -4,10 +4,11 @@
 - pull submodules
 
 - build docker images
+    docker compose build --no-cache
 
-- update configs
-    - syxtrade config
-    - syxtrade env
-    - mornitor env
+
+- update syxtrade config
+    $cp src/syxtrade/config/config.sample.json src/syxtrade/config/config.json
 
 - start docker containers
+    docker compose up -d
